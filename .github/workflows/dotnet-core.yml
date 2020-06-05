@@ -1,0 +1,30 @@
+name: .NET Core
+
+on:
+  push:
+    tags: "*"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Create the package V1
+      run: dotnet pack --configuration Release src\WalletApiV1 /p:Version=${GITHUB_REF#refs/tags/}
+    - name: Publish the package to GPR V1
+      run: dotnet nuget push src/WalletApiV1/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
+    - name: Create the package V2
+      run: dotnet pack --configuration Release src\WalletApiV2 /p:Version=${GITHUB_REF#refs/tags/}
+    - name: Publish the package to GPR V2
+      run: dotnet nuget push src/WalletApiV2/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
+
