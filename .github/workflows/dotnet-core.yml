@@ -20,11 +20,11 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Create the package V1
-      run: dotnet pack --configuration Release src\WalletApiV1 /p:Version=${GITHUB_REF#refs/tags/}
+      run: dotnet pack --configuration Release src\WalletApiV1\Lykke.ApiClients.V1.csproj /p:Version=${GITHUB_REF#refs/tags/}
     - name: Publish the package to GPR V1
       run: dotnet nuget push src/WalletApiV1/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
     - name: Create the package V2
-      run: dotnet pack --configuration Release src\WalletApiV2 /p:Version=${GITHUB_REF#refs/tags/}
+      run: dotnet pack --configuration Release src\WalletApiV2\Lykke.ApiClients.V2.csproj /p:Version=${GITHUB_REF#refs/tags/}
     - name: Publish the package to GPR V2
       run: dotnet nuget push src/WalletApiV2/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
 
