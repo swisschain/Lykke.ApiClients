@@ -1,0 +1,4054 @@
+{
+  "swagger": "2.0",
+  "info": { "version": "v2", "title": "Lykke Wallet API v2" },
+  "paths":
+  {
+    "/api/Affiliate/link":
+    {
+      "get": {
+        "tags": ["Affiliate"],
+        "operationId": "GetLink",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AffiliateLinkResponse" } },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/Affiliate/create":
+    {
+      "post": {
+        "tags": ["Affiliate"],
+        "operationId": "CreateLink",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AffiliateLinkResponse" } },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/Affiliate/stats":
+    {
+      "get": {
+        "tags": ["Affiliate"],
+        "operationId": "GetStats",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AffiliateStatisticsResponse" } }
+        }
+      }
+    },
+    "/api/AssetPairs":
+    {
+      "get": {
+        "tags": [ "AssetPairs" ],
+        "summary": "Get asset pairs.",
+        "operationId": "GetAssetPairs",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/AssetPairResponseModel" }
+          }
+        }
+      }
+    },
+    "/api/AssetPairs/available":
+    {
+      "get": {
+        "tags": ["AssetPairs"],
+        "summary": "Get available asset pairs.",
+        "operationId": "GetAvailable",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetPairResponseModel" } }
+        }
+      }
+    },
+    "/api/AssetPairs/{id}":
+    {
+      "get": {
+        "tags": ["AssetPairs"],
+        "summary": "Get asset pair by id.",
+        "operationId": "GetAssetPairById",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "id", "in": "path", "description": "", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetPairResponseModel" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/AssetPairs/rates":
+    {
+      "get": {
+        "tags": ["AssetPairs"],
+        "summary": "Get asset pair rates.",
+        "operationId": "GetAssetPairRates",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetPairRatesResponseModel" } }
+        }
+      }
+    },
+    "/api/AssetPairs/rates/{assetPairId}":
+    {
+      "get": {
+        "tags": ["AssetPairs"],
+        "summary": "Get asset pair rates by id.",
+        "operationId": "GetAssetPairRatesById",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "assetPairId", "in": "path", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetPairRatesResponseModel" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/assets":
+    {
+      "get": {
+        "tags": [ "Assets" ],
+        "summary": "Get assets.",
+        "operationId": "GetAssets",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/AssetsModel" }
+          }
+        }
+      }
+    },
+    "/api/assets/minOrderAmount":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get assets minimum order amount.",
+        "operationId": "GetAssetMinOrderAmount",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/AssetMinOrderAmountModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/assets/{id}":
+    {
+      "get": {
+        "tags": [ "Assets" ],
+        "summary": "Get asset by id.",
+        "operationId": "GetAssetsById",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/AssetRespModel" }
+          },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/assets/{assetId}/attributes":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get asset attributes.",
+        "operationId": "GetAssetAttributes",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "assetId", "in": "path", "description": "", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetAttributesModel" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/assets/{assetId}/attributes/{key}":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get asset attributes by key.",
+        "operationId": "GetAssetAttributeByKey",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "description": "", "required": true, "type": "string" },
+          { "name": "key", "in": "path", "description": "", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/KeyValue" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/assets/description":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get asset descriptions.",
+        "operationId": "GetAssetDescriptions",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetDescriptionsModel" } }
+        }
+      }
+    },
+    "/api/assets/{assetId}/description":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get asset description.",
+        "operationId": "GetAssetDescription",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "assetId", "in": "path", "description": "", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetDescriptionModel" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/assets/categories":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get asset categories.",
+        "operationId": "GetAssetCategories",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetCategoriesModel" } } }
+      }
+    },
+    "/api/assets/categories/{id}":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get asset category.",
+        "operationId": "GetAssetCategory",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "id", "in": "path", "description": "", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetCategoriesModel" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/assets/baseAsset":
+    {
+      "get":
+      {
+        "tags": ["Assets"],
+        "operationId": "GetBaseAsset",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/BaseAssetModel" } } }
+      },
+      "post": {
+        "tags": ["Assets"],
+        "operationId": "SetBaseAsset",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/BaseAssetUpdateModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/assets/available":
+    {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get assets available for the user based on regulations.",
+        "operationId": "GetAvailableAssets",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/AssetIdsModel" } } }
+      }
+    },
+    "/api/candlesHistory/{type}/{assetPairId}/{priceType}/{timeInterval}/{fromMoment}/{toMoment}":
+    {
+      "get": {
+        "tags": [ "CandlesHistory" ],
+        "summary": "AssetPairs candles history (deprecated)",
+        "description": "",
+        "operationId": "GetCandlesHistory",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "Type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [ "Spot", "Mt" ],
+            "x-ms-enum": {
+              "name": "MarketType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "AssetPairId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PriceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [ "Unspecified", "Bid", "Ask", "Mid", "Trades" ],
+            "x-ms-enum": {
+              "name": "CandlePriceType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "TimeInterval",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Unspecified",
+              "Sec",
+              "Minute",
+              "Min5",
+              "Min15",
+              "Min30",
+              "Hour",
+              "Hour4",
+              "Hour6",
+              "Hour12",
+              "Day",
+              "Week",
+              "Month"
+            ],
+            "x-ms-enum": {
+              "name": "CandleTimeInterval",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "FromMoment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "ToMoment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/CandleSticksResponseModel" }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": { "type": "string" }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/candlesHistory":
+    {
+      "get": {
+        "tags": ["CandlesHistory"],
+        "summary": "AssetPairs candles history",
+        "operationId": "GetCandles",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": ["Spot", "Mt"],
+            "x-ms-enum": { "name": "MarketType", "modelAsString": false }
+          }, { "name": "AssetPairId", "in": "query", "required": false, "type": "string" },
+          {
+            "name": "PriceType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": ["Unspecified", "Bid", "Ask", "Mid", "Trades"],
+            "x-ms-enum": { "name": "CandlePriceType", "modelAsString": false }
+          },
+          {
+            "name": "TimeInterval",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Unspecified", "Sec", "Minute", "Min5", "Min15", "Min30", "Hour", "Hour4", "Hour6", "Hour12", "Day",
+              "Week", "Month"
+            ],
+            "x-ms-enum": { "name": "CandleTimeInterval", "modelAsString": false }
+          }, { "name": "FromMoment", "in": "query", "required": false, "type": "string", "format": "date-time" },
+          { "name": "ToMoment", "in": "query", "required": false, "type": "string", "format": "date-time" }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/CandleSticksResponseModel" } },
+          "404": { "description": "Not Found", "schema": { "type": "string" } }
+        }
+      }
+    },
+    "/api/Catalogs/countries":
+    {
+      "get": {
+        "tags": ["Catalogs"],
+        "operationId": "GetCountryPhoneCodes",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/CountryItem" } }
+          }
+        }
+      }
+    },
+    "/api/client/register":
+    {
+      "post": {
+        "tags": [ "Client" ],
+        "summary": "Register a new client.",
+        "operationId": "RegisterPost",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/AccountRegistrationModel" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/AccountsRegistrationResponseModel" }
+          },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/client/auth":
+    {
+      "post": {
+        "tags": ["Client"],
+        "summary": "Authenticate.",
+        "description":
+          "In order to get access to an api, you should go through OAuth. \n                    It's accessible through 'Autorize' button from the right-top corner of this page.\n                    If you need to get access tokens for your client app, then you should build an integration with Lykke OAuth server.",
+        "operationId": "Auth",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "model", "in": "body", "required": false, "schema": { "$ref": "#/definitions/AuthRequestModel" } }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AuthResponseModel" } },
+          "400": { "description": "Bad Request" }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/client/logout":
+    {
+      "post": {
+        "tags": ["Client"],
+        "operationId": "LogOut",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/client/session":
+    {
+      "post":
+      {
+        "tags": ["Client"],
+        "operationId": "CreateTradingSession",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          { "name": "request", "in": "body", "required": false, "schema": { "$ref": "#/definitions/TradingModel" } },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "patch": {
+        "tags": ["Client"],
+        "operationId": "ExtendTradingSession",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          { "name": "request", "in": "body", "required": false, "schema": { "$ref": "#/definitions/TradingModel" } },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/client/userInfo":
+    {
+      "get": {
+        "tags": ["Client"],
+        "operationId": "UserInfo",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/UserInfoResponseModel" } },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/api/client/features":
+    {
+      "get": {
+        "tags": ["Client"],
+        "operationId": "Features",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/FeaturesResponseModel" } },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/api/client/dob":
+    {
+      "get":
+      {
+        "tags": ["Client"],
+        "summary": "Get date of birth",
+        "operationId": "GetDateOfBirth",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/DateOfBirthResponseModel" } },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      },
+      "post": {
+        "tags": ["Client"],
+        "summary": "Update date of birth",
+        "operationId": "UpdateDateOfBirth",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/DateOfBirthModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      }
+    },
+    "/api/client/address":
+    {
+      "get":
+      {
+        "tags": ["Client"],
+        "summary": "Get address",
+        "operationId": "GetAddress",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/AddressResponseModel" } },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      },
+      "post": {
+        "tags": ["Client"],
+        "summary": "Update address",
+        "operationId": "UpdateAddress",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/AddressModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      }
+    },
+    "/api/client/zip":
+    {
+      "get":
+      {
+        "tags": ["Client"],
+        "summary": "Get zip code",
+        "operationId": "GetZipCode",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/ZipCodeResponseModel" } },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      },
+      "post": {
+        "tags": ["Client"],
+        "summary": "Update zip/postal code",
+        "operationId": "UpdateZipCode",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/ZipCodeModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      }
+    },
+    "/api/Deposits/fxpaygate/last":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "summary": "Get last PaymentTransaction",
+        "description": "use /api/deposits/last",
+        "operationId": "GetLastFxPaygate",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/PaymentTransactionResponse" } }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/Deposits/last":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "summary": "Get last PaymentTransaction",
+        "operationId": "GetLastTransaction",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/PaymentTransactionResponse" } }
+        }
+      }
+    },
+    "/api/Deposits/{transactionId}":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "summary": "Get transaction information",
+        "operationId": "GetTransactionInfo",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "transactionId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/TransactionInfoResponse" } },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/Deposits/fxpaygate/fee":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "summary": "Get fee amount",
+        "description": "use /api/deposits/bankCard/fee",
+        "operationId": "GetFxPaygateFee",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/BankCardFeeModel" } } },
+        "deprecated": true
+      }
+    },
+    "/api/Deposits/bankCard/fee":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "summary": "Get fee amount",
+        "operationId": "GetBankCardFee",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/BankCardFeeModel" } } }
+      }
+    },
+    "/api/Deposits/fxpaygate":
+    {
+      "post": {
+        "tags": ["Deposits"],
+        "summary": "Get Url for PaymentSystem",
+        "description": "use /api/deposits/paymentUrl",
+        "operationId": "PostFxPaygate",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "input",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/PaymentUrlRequestModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/PaymentUrlResponseModel" } }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/Deposits/paymentUrl":
+    {
+      "post": {
+        "tags": ["Deposits"],
+        "summary": "Get Url for PaymentSystem",
+        "operationId": "GetPaymentUrl",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "input",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/PaymentUrlRequestModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/PaymentUrlResponseModel" } }
+        }
+      }
+    },
+    "/api/Deposits/swift/{assetId}/email":
+    {
+      "post": {
+        "tags": ["Deposits"],
+        "operationId": "PostRequestSwiftRequisites",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/SwiftDepositEmailModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/Deposits/swift/{assetId}/requisites":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "operationId": "GetSwiftRequisites",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/SwiftRequisitesRespModel" } }
+        }
+      }
+    },
+    "/api/Deposits/crypto/{assetId}/address":
+    {
+      "get": {
+        "tags": ["Deposits"],
+        "operationId": "GetCryptosDepositAddresses",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/CryptoDepositAddressRespModel" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      },
+      "post": {
+        "tags": ["Deposits"],
+        "operationId": "PostCryptosDepositAddresses",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/dialogs":
+    {
+      "get": {
+        "tags": ["Dialogs"],
+        "operationId": "GetAllPendingDialogs",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/ClientDialogResponseModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/dialogs/{dialogId}/actions/{actionId}":
+    {
+      "post": {
+        "tags": ["Dialogs"],
+        "operationId": "SubmitPendingDialog",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "dialogId", "in": "path", "required": true, "type": "string" },
+          { "name": "actionId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "404": { "description": "Not Found" } }
+      }
+    },
+    "/api/dictionary/{key}":
+    {
+      "get":
+      {
+        "tags": ["Dictionary"],
+        "operationId": "GetKey",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "key", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/DataModel" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "post": {
+        "tags": ["Dictionary"],
+        "operationId": "SetKey",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          { "name": "key", "in": "path", "required": true, "type": "string" },
+          { "name": "request", "in": "body", "required": false, "schema": { "$ref": "#/definitions/DataModel" } },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "delete": {
+        "tags": ["Dictionary"],
+        "operationId": "DeleteKey",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "key", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/hft/regenerateKey":
+    {
+      "put": {
+        "tags": ["Hft"],
+        "summary": "Create new api-key for existing wallet.",
+        "operationId": "RegenerateKey",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/RegenerateKeyRequestModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/CreateApiKeyResponse" } },
+          "404": {
+            "description": "Not Found",
+            "schema": { "$ref": "#/definitions/Google2FaResultModel[CreateApiKeyResponse]" }
+          }
+        }
+      }
+    },
+    "/api/History/client/csv":
+    {
+      "get":
+      {
+        "tags": ["History"],
+        "operationId": "GetClientHistoryCsv",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "id", "in": "query", "required": false, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/GetClientHistoryCsvResponseModel" } }
+        }
+      },
+      "post": {
+        "tags": ["History"],
+        "operationId": "RequestClientHistoryCsv",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/RequestClientHistoryCsvRequestModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/RequestClientHistoryCsvResponseModel" }
+          }
+        }
+      }
+    },
+    "/api/History/wallet/{walletId}":
+    {
+      "get": {
+        "tags": ["History"],
+        "summary": "Getting history by wallet identifier",
+        "operationId": "GetByWalletId",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "walletId", "in": "path", "description": "Wallet identifier", "required": true, "type": "string" },
+          {
+            "name": "operationType",
+            "in": "query",
+            "description": "The type of the operation, possible values: CashIn, CashOut, Trade, OrderEvent",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi",
+            "uniqueItems": false
+          },
+          { "name": "assetId", "in": "query", "description": "Asset identifier", "required": false, "type": "string" },
+          {
+            "name": "assetPairId",
+            "in": "query",
+            "description": "Asset pair identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "How many maximum items have to be returned",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "How many items skip before returning",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": { "description": "Server Error", "schema": { "$ref": "#/definitions/ErrorResponse" } },
+          "404": { "description": "Not Found" },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/HistoryResponseModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/History/{walletId}/trades":
+    {
+      "get": {
+        "tags": ["History"],
+        "summary": "Getting history by wallet identifier",
+        "operationId": "GetTradesByWalletId",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "walletId", "in": "path", "description": "Wallet identifier", "required": true, "type": "string" },
+          {
+            "name": "assetPairId",
+            "in": "query",
+            "description": "Asset pair identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "How many maximum items have to be returned",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "How many items skip before returning",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "tradeType",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "enum": ["Buy", "Sell"],
+            "x-ms-enum": { "name": "TradeType", "modelAsString": false }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": { "description": "Server Error", "schema": { "$ref": "#/definitions/ErrorResponse" } },
+          "404": { "description": "Not Found" },
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/TradeResponseModel" } }
+          }
+        }
+      }
+    },
+    "/api/History/{walletId}/funds":
+    {
+      "get": {
+        "tags": ["History"],
+        "summary": "Getting history by wallet identifier",
+        "operationId": "GetFundsByWalletId",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "walletId", "in": "path", "description": "Wallet identifier", "required": true, "type": "string" },
+          {
+            "name": "operation",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string", "enum": ["Deposit", "Withdraw"] },
+            "collectionFormat": "multi",
+            "uniqueItems": false
+          },
+          { "name": "assetId", "in": "query", "description": "Asset identifier", "required": false, "type": "string" },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "How many maximum items have to be returned",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "How many items skip before returning",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": { "description": "Server Error", "schema": { "$ref": "#/definitions/ErrorResponse" } },
+          "404": { "description": "Not Found" },
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/FundsResponseModel" } }
+          }
+        }
+      }
+    },
+    "/api/History/crypto/{assetId}/transactions/{transactionHash}/links":
+    {
+      "get": {
+        "tags": ["History"],
+        "summary": "Getting explorer url links for the given blockchain type and txHash",
+        "operationId": "GetExplorerLinks",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          { "name": "transactionHash", "in": "path", "description": "", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": { "description": "Server Error", "schema": { "$ref": "#/definitions/ErrorResponse" } },
+          "404": { "description": "Not Found" },
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/BlockchainExplorersCollection" } }
+        }
+      }
+    },
+    "/api/indices":
+    {
+      "get": {
+        "tags": ["Indices"],
+        "summary": "Returns all indices",
+        "operationId": "GetAllAsync",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/Index" } }
+          }
+        }
+      }
+    },
+    "/api/indices/{assetId}":
+    {
+      "get": {
+        "tags": ["Indices"],
+        "summary": "Returns index details by index asset identifier",
+        "operationId": "GetAsync",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "assetId", "in": "path", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/Index" } },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/indices/{assetId}/history/{timeInterval}":
+    {
+      "get": {
+        "tags": ["Indices"],
+        "summary": "Returns history values by index asset identifier and time interval",
+        "operationId": "GetHistoryAsync",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "timeInterval",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": ["Unspecified", "Hour24", "Day5", "Day30"],
+            "x-ms-enum": { "name": "TimeInterval", "modelAsString": false }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/HistoryElement" } }
+          },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/indices/{assetId}/prices":
+    {
+      "get": {
+        "tags": ["Indices"],
+        "summary": "Returns raw prices from external exchanges for assets that are used for index calculation",
+        "operationId": "GetPricesAsync",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [{ "name": "assetId", "in": "path", "required": true, "type": "string" }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/AssetPrices" } }
+          },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/IsAlive":
+    {
+      "get": {
+        "tags": [ "IsAlive" ],
+        "summary": "Checks service is alive",
+        "operationId": "GetIsAlive",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/IsAliveResponse" }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/api/market/converter":
+    {
+      "post": {
+        "tags": ["Market"],
+        "summary": "Convert one asset to another.",
+        "operationId": "Convert",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/ConvertionRequest" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/ConvertionResponse" } },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/markets":
+    {
+      "get": {
+        "tags": [ "Markets" ],
+        "summary": "Get actual market state for all registered asset pairs.",
+        "operationId": "GetMarkets",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/MarketSlice" }
+            }
+          },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/markets/{assetPairId}":
+    {
+      "get": {
+        "tags": [ "Markets" ],
+        "summary": "Get actual market state for the given asset pair.",
+        "operationId": "GetMarketsByAssetPairId",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "assetPairId",
+            "in": "path",
+            "description": "The target asset pair ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/MarketSlice" }
+          },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/notifications/push":
+    {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Register installation in notifications hub",
+        "operationId": "RegisterInstallation",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/PushRegistrationModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/InstallationResponse" } },
+          "400": { "description": "Bad Request", "schema": { "$ref": "#/definitions/LykkeApiErrorResponse" } }
+        }
+      }
+    },
+    "/api/operations/{id}":
+    {
+      "get": {
+        "tags": [ "Operations" ],
+        "summary": "Get operation by id",
+        "operationId": "GetOperationsById",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/operations/transfer":
+    {
+      "post": {
+        "tags": ["Operations"],
+        "summary": "Create transfer operation",
+        "operationId": "Transfer",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "cmd",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/CreateTransferRequest" }
+          }, { "name": "id", "in": "query", "description": "", "required": false, "type": "string", "format": "uuid" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/Google2FaResultModel[String]" } }
+        }
+      }
+    },
+    "/api/operations/cashout/crypto":
+    {
+      "post": {
+        "tags": ["Operations"],
+        "summary": "Create cashout operation",
+        "operationId": "Cashout",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "cmd",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/CreateCashoutRequest" }
+          }, { "name": "id", "in": "query", "description": "", "required": false, "type": "string", "format": "uuid" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "type": "string" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/operations/cashout/swift":
+    {
+      "post": {
+        "tags": ["Operations"],
+        "summary": "Create swift cashout operation",
+        "operationId": "SwiftCashout",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "cmd",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/CreateSwiftCashoutRequest" }
+          }, { "name": "id", "in": "query", "description": "", "required": false, "type": "string", "format": "uuid" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "type": "string" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/operations/cancel/{id}":
+    {
+      "post": {
+        "tags": ["Operations"],
+        "summary": "Cancel operation",
+        "operationId": "Cancel",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "id", "in": "path", "description": "", "required": true, "type": "string", "format": "uuid" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/Orderbook":
+    {
+      "get": {
+        "tags": [ "Orderbook" ],
+        "operationId": "GetOrderbook",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "assetPairId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/OrderBookModel" }
+            }
+          },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/orders":
+    {
+      "get": {
+        "tags": ["Orders"],
+        "operationId": "GetLimitOrders",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "offset", "in": "query", "required": false, "type": "integer", "format": "int32", "default": 0 },
+          { "name": "limit", "in": "query", "required": false, "type": "integer", "format": "int32", "default": 1000 },
+          { "name": "assetPair", "in": "query", "required": false, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/LimitOrderResponseModel" }
+            }
+          },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/orders/limit/{orderId}/cancel":
+    {
+      "post": {
+        "tags": ["Orders"],
+        "operationId": "CancelLimitOrder",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "orderId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/orders/market":
+    {
+      "post": {
+        "tags": ["Orders"],
+        "operationId": "PlaceMarketOrder",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/MarketOrderRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "type": "string" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/orders/limit":
+    {
+      "post":
+      {
+        "tags": ["Orders"],
+        "operationId": "PlaceLimitOrder",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/LimitOrderRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "type": "string" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "delete": {
+        "tags": ["Orders"],
+        "operationId": "CancelMultipleLimitOrders",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/LimitOrderCancelMultipleRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "400": { "description": "Bad Request" } }
+      }
+    },
+    "/api/orders/stoplimit":
+    {
+      "post": {
+        "tags": ["Orders"],
+        "operationId": "PlaceStopLimitOrder",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/StopLimitOrderRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "type": "string" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/orders/limit/{orderId}":
+    {
+      "delete": {
+        "tags": ["Orders"],
+        "operationId": "CancelLimitOrderNew",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "orderId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "404": { "description": "Not Found" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/PaymentMethods":
+    {
+      "get": {
+        "tags": [ "PaymentMethods" ],
+        "summary": "Get PaymentMethods",
+        "operationId": "GetPaymentMethods",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/PaymentMethodsResponse" }
+          }
+        }
+      }
+    },
+    "/api/2fa/operation":
+    {
+      "post": {
+        "tags": ["SecondFactorAuth"],
+        "summary": "confirm operation with 2fa",
+        "operationId": "ConfirmOperation",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/OperationConfirmationModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/2fa":
+    {
+      "get": {
+        "tags": ["SecondFactorAuth"],
+        "operationId": "GetAvailable",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/SecondFactorDetailsModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/2fa/setup/google":
+    {
+      "get":
+      {
+        "tags": ["SecondFactorAuth"],
+        "operationId": "SetupGoogle2FaRequest",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/GoogleSetupRequestResponse" } }
+        }
+      },
+      "post": {
+        "tags": ["SecondFactorAuth"],
+        "operationId": "SetupGoogle2FaVerify",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/GoogleSetupVerifyRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/GoogleSetupVerifyResponse" } }
+        }
+      }
+    },
+    "/api/2fa/setup/google/confirmRequest":
+    {
+      "post": {
+        "tags": ["SecondFactorAuth"],
+        "operationId": "ConfirmGoogle2FaSetup",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/SmsConfirmationResponse" } }
+        }
+      }
+    },
+    "/api/2fa/session":
+    {
+      "post": {
+        "tags": ["SecondFactorAuth"],
+        "operationId": "ConfirmTradingSession",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/TradingSessionConfirmModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/wallets":
+    {
+      "get":
+      {
+        "tags": ["Wallets"],
+        "summary": "Get all client wallets.",
+        "operationId": "GetWallets",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/WalletModel" } }
+          },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "post": {
+        "tags": ["Wallets"],
+        "summary": "Create wallet.",
+        "operationId": "CreateWallet",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/CreateWalletRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WalletModel" } } }
+      }
+    },
+    "/api/wallets/hft":
+    {
+      "post": {
+        "tags": ["Wallets"],
+        "summary": "Create trusted wallet and generate API-key.",
+        "operationId": "CreateApiWallet",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/CreateApiKeyRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/CreateApiKeyResponse" } },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/wallets/{id}":
+    {
+      "get":
+      {
+        "tags": ["Wallets"],
+        "summary": "Get specified wallet.",
+        "operationId": "GetWallet",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WalletModel" } },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "put": {
+        "tags": ["Wallets"],
+        "summary": "Modify existing wallet.",
+        "operationId": "ModifyWallet",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "id", "in": "path", "description": "Wallet id.", "required": true, "type": "string" },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": { "$ref": "#/definitions/ModifyWalletRequest" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WalletModel" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "delete": {
+        "tags": ["Wallets"],
+        "summary": "Delete wallet.",
+        "operationId": "DeleteWallet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "id", "in": "path", "description": "", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "404": { "description": "Not Found" } }
+      }
+    },
+    "/api/wallets/balances":
+    {
+      "get": {
+        "tags": ["Wallets"],
+        "summary": "Get all wallets balances.",
+        "operationId": "GetBalances",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/WalletBalancesModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallets/trading/balances":
+    {
+      "get": {
+        "tags": ["Wallets"],
+        "summary": "Get trading wallet balances.",
+        "operationId": "GetTradingWalletBalances",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/ClientBalanceResponseModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallets/{walletId}/balances":
+    {
+      "get": {
+        "tags": ["Wallets"],
+        "summary": "Get specified wallet balances.",
+        "operationId": "GetWalletBalances",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "walletId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/ClientBalanceResponseModel" }
+            }
+          },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/wallets/balances/{assetId}":
+    {
+      "get": {
+        "tags": ["Wallets"],
+        "summary": "Get balances by asset id.",
+        "operationId": "GetBalancesByAssetId",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/WalletAssetBalanceModel" }
+            }
+          },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/wallets/trading/balances/{assetId}":
+    {
+      "get": {
+        "tags": ["Wallets"],
+        "summary": "Get trading wallet balances by asset id.",
+        "operationId": "GetTradindWalletBalanceByAssetId",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/ClientBalanceResponseModel" } },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/wallets/{walletId}/balances/{assetId}":
+    {
+      "get": {
+        "tags": ["Wallets"],
+        "summary": "Get specified wallet balances by asset id.",
+        "operationId": "GetWalletBalanceByAssetId",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "walletId", "in": "path", "required": true, "type": "string" },
+          { "name": "assetId", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/ClientBalanceResponseModel" } },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/watchlists":
+    {
+      "get":
+      {
+        "tags": ["Watchlists"],
+        "operationId": "GetWatchlists",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/WatchListModel" } }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Watchlists"],
+        "operationId": "Create",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/WatchListCreateModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WatchListModel" } },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/api/watchlists/{id}":
+    {
+      "get": {
+        "tags": [ "Watchlists" ],
+        "operationId": "GetWatchlists",
+        "consumes": [],
+        "produces": [ "application/json", "text/json", "text/plain" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/WatchListModel" }
+          },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "put": {
+        "tags": ["Watchlists"],
+        "operationId": "Update",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/WatchListUpdateModel" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WatchListModel" } },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "delete": {
+        "tags": ["Watchlists"],
+        "operationId": "Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/api/withdrawals/crypto/{assetId}/info":
+    {
+      "get": {
+        "tags": ["Withdrawals"],
+        "summary": "Get additional asset info for crypto withdrawal",
+        "operationId": "GetAssetInfo",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "description": "", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WithdrawalCryptoInfoModel" } }
+        }
+      }
+    },
+    "/api/withdrawals/crypto/{assetId}/fee":
+    {
+      "get": {
+        "tags": ["Withdrawals"],
+        "summary": "Get asset fee for crypto withdrawal",
+        "operationId": "GetCryptoFee",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "description": "", "required": true, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WithdrawalCryptoFeeModel" } }
+        }
+      }
+    },
+    "/api/withdrawals/crypto/fees":
+    {
+      "get": {
+        "tags": ["Withdrawals"],
+        "summary": "Get fees for crypto withdrawal",
+        "operationId": "GetCryptoFees",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/WithdrawalCashoutFeeModel" }
+            }
+          }
+        }
+      }
+    },
+    "/api/withdrawals/crypto/{assetId}/validateAddress":
+    {
+      "get": {
+        "tags": ["Withdrawals"],
+        "summary": "Validate asset withdrawal address and extension (if presented)",
+        "operationId": "ValidateCryptoAddress",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          { "name": "assetId", "in": "path", "description": "", "required": true, "type": "string" },
+          { "name": "baseAddress", "in": "query", "description": "", "required": false, "type": "string" },
+          { "name": "addressExtension", "in": "query", "description": "", "required": false, "type": "string" },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/WithdrawalCryptoAddressValidationModel" }
+          }
+        }
+      }
+    },
+    "/api/withdrawals/available":
+    {
+      "get": {
+        "tags": ["Withdrawals"],
+        "summary": "Get available assets for crypto and swift withdrawal",
+        "operationId": "GetAvailableMethods",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success", "schema": { "$ref": "#/definitions/WithdrawalMethodsResponse" } }
+        }
+      }
+    },
+    "/api/withdrawals/swift/last": {
+      "get": {
+        "tags": ["Withdrawals"],
+        "summary": "Get last swift cashout data",
+        "operationId": "GetLastSwift",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "text/plain"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description":
+              "Old Lykke access token. *It's not required for request, you can use embed 'Authorization' option to use a new one under the hood.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/SwiftLastResponse" } } }
+      }
+    }
+  },
+  "definitions": {
+    "AffiliateLinkResponse":
+      { "type": "object", "properties": { "Url": { "type": "string" }, "RedirectUrl": { "type": "string" } } },
+    "AffiliateStatisticsResponse":
+    {
+      "required": ["ReferralsCount", "TotalBonus", "TotalTradeVolume"],
+      "type": "object",
+      "properties": {
+        "ReferralsCount": { "format": "int32", "type": "integer" },
+        "TotalBonus": { "format": "double", "type": "number" },
+        "TotalTradeVolume": { "format": "double", "type": "number" }
+      }
+    },
+    "AssetPairResponseModel":
+    {
+      "type": "object",
+      "properties": {
+        "AssetPairs": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/AssetPairModel" } }
+      }
+    },
+    "AssetPairModel":
+    {
+      "required": ["Accuracy", "InvertedAccuracy"],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Accuracy": { "format": "int32", "type": "integer" },
+        "BaseAssetId": { "type": "string" },
+        "InvertedAccuracy": { "format": "int32", "type": "integer" },
+        "Name": { "type": "string" },
+        "QuotingAssetId": { "type": "string" }
+      }
+    },
+    "AssetPairRatesResponseModel":
+    {
+      "type": "object",
+      "properties": {
+        "AssetPairRates": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/AssetPairRateModel" }
+        }
+      }
+    },
+    "AssetPairRateModel":
+    {
+      "required": ["BidPrice", "AskPrice", "BidPriceTimestamp", "AskPriceTimestamp"],
+      "type": "object",
+      "properties": {
+        "AssetPair": { "type": "string" },
+        "BidPrice": { "format": "double", "type": "number" },
+        "AskPrice": { "format": "double", "type": "number" },
+        "BidPriceTimestamp": { "format": "date-time", "type": "string" },
+        "AskPriceTimestamp": { "format": "date-time", "type": "string" }
+      }
+    },
+    "AssetsModel":
+    {
+      "type": "object",
+      "properties": {
+        "Assets": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/AssetModel" } }
+      }
+    },
+    "AssetModel":
+    {
+      "required":
+      [
+        "Accuracy", "KycNeeded", "BankCardsDepositEnabled", "SwiftDepositEnabled", "BlockchainDepositEnabled", "IsBase",
+        "CanBeBase"
+      ],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Name": { "type": "string" },
+        "DisplayId": { "type": "string" },
+        "Accuracy": { "format": "int32", "type": "integer" },
+        "KycNeeded": { "type": "boolean" },
+        "BankCardsDepositEnabled": { "type": "boolean" },
+        "SwiftDepositEnabled": { "type": "boolean" },
+        "BlockchainDepositEnabled": { "type": "boolean" },
+        "CategoryId": { "type": "string" },
+        "IsBase": { "type": "boolean" },
+        "CanBeBase": { "type": "boolean" },
+        "IconUrl": { "type": "string" }
+      }
+    },
+    "AssetMinOrderAmountModel":
+    {
+      "required": ["MinOrderAmount"],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "AssetDisplayId": { "type": "string" },
+        "MinOrderAmount": { "format": "double", "type": "number" }
+      }
+    },
+    "AssetRespModel": { "type": "object", "properties": { "Asset": { "$ref": "#/definitions/AssetModel" } } },
+    "AssetAttributesModel":
+    {
+      "type": "object",
+      "properties": {
+        "Attrbuttes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/IAssetAttributesKeyValue" }
+        }
+      }
+    },
+    "IAssetAttributesKeyValue":
+      { "type": "object", "properties": { "Key": { "type": "string" }, "Value": { "type": "string" } } },
+    "KeyValue": { "type": "object", "properties": { "Key": { "type": "string" }, "Value": { "type": "string" } } },
+    "AssetDescriptionsModel":
+    {
+      "type": "object",
+      "properties": {
+        "Descriptions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/AssetDescriptionModel" }
+        }
+      }
+    },
+    "AssetDescriptionModel":
+    {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "AssetClass": { "type": "string" },
+        "Description": { "type": "string" },
+        "IssuerName": { "type": "string" },
+        "NumberOfCoins": { "type": "string" },
+        "AssetDescriptionUrl": { "type": "string" },
+        "FullName": { "type": "string" }
+      }
+    },
+    "AssetCategoriesModel":
+    {
+      "type": "object",
+      "properties": {
+        "AssetCategories": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/AssetCategoryModel" }
+        }
+      }
+    },
+    "AssetCategoryModel":
+    {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Name": { "type": "string" },
+        "SortOrder": { "format": "int32", "type": "integer" }
+      }
+    },
+    "BaseAssetModel": { "type": "object", "properties": { "BaseAssetId": { "type": "string" } } },
+    "BaseAssetUpdateModel":
+      { "type": "object", "properties": { "BaseAsssetId": { "type": "string" }, "BaseAssetId": { "type": "string" } } },
+    "AssetIdsModel":
+    {
+      "type": "object",
+      "properties": { "AssetIds": { "uniqueItems": false, "type": "array", "items": { "type": "string" } } }
+    },
+    "CandleSticksResponseModel":
+    {
+      "type": "object",
+      "properties": {
+        "History": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/CandleStickHistoryItem" }
+        }
+      }
+    },
+    "CandleStickHistoryItem":
+    {
+      "required": ["DateTime", "Open", "Close", "High", "Low", "Volume", "OppositeVolume"],
+      "type": "object",
+      "properties": {
+        "DateTime": { "format": "date-time", "type": "string" },
+        "Open": { "format": "double", "type": "number" },
+        "Close": { "format": "double", "type": "number" },
+        "High": { "format": "double", "type": "number" },
+        "Low": { "format": "double", "type": "number" },
+        "Volume": { "format": "double", "type": "number" },
+        "OppositeVolume": { "format": "double", "type": "number" }
+      }
+    },
+    "CountryItem":
+    {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Iso2": { "type": "string" },
+        "Name": { "type": "string" },
+        "Prefix": { "type": "string" }
+      }
+    },
+    "AccountRegistrationModel":
+    {
+      "required": ["Email", "Password"],
+      "type": "object",
+      "properties": {
+        "Email": { "type": "string" },
+        "FullName": { "type": "string" },
+        "ContactPhone": { "type": "string" },
+        "Password": { "type": "string" },
+        "Hint": { "type": "string" },
+        "ClientInfo": { "type": "string" },
+        "PartnerId": { "type": "string" }
+      }
+    },
+    "AccountsRegistrationResponseModel":
+    {
+      "required": ["CanCashInViaBankCard", "SwiftDepositEnabled"],
+      "type": "object",
+      "properties": {
+        "Token": { "type": "string" },
+        "NotificationsId": { "type": "string" },
+        "PersonalData": { "$ref": "#/definitions/ApiPersonalDataModel" },
+        "CanCashInViaBankCard": { "type": "boolean" },
+        "SwiftDepositEnabled": { "type": "boolean" }
+      }
+    },
+    "ApiPersonalDataModel":
+    {
+      "type": "object",
+      "properties": {
+        "FullName": { "type": "string" },
+        "FirstName": { "type": "string" },
+        "LastName": { "type": "string" },
+        "Email": { "type": "string" },
+        "Phone": { "type": "string" },
+        "Country": { "type": "string" },
+        "Address": { "type": "string" },
+        "City": { "type": "string" },
+        "Zip": { "type": "string" }
+      }
+    },
+    "AuthRequestModel":
+    {
+      "required": ["Email", "Password", "PartnerId"],
+      "type": "object",
+      "properties": {
+        "Email": { "type": "string" },
+        "Password": { "type": "string" },
+        "ClientInfo": { "type": "string" },
+        "PartnerId": { "type": "string" }
+      }
+    },
+    "AuthResponseModel":
+    {
+      "type": "object",
+      "properties": { "AccessToken": { "type": "string" }, "NotificationsId": { "type": "string" } }
+    },
+    "TradingModel":
+      { "required": ["Ttl"], "type": "object", "properties": { "Ttl": { "format": "int32", "type": "integer" } } },
+    "UserInfoResponseModel":
+    {
+      "required": ["KycStatus"],
+      "type": "object",
+      "properties": {
+        "Email": { "type": "string" },
+        "FirstName": { "type": "string" },
+        "LastName": { "type": "string" },
+        "KycStatus": {
+          "enum": [
+            "NeedToFillData", "Pending", "ReviewDone", "Ok", "Rejected", "RestrictedArea", "Complicated",
+            "JumioInProgress", "JumioOk", "JumioFailed"
+          ],
+          "type": "string",
+          "x-ms-enum": { "name": "KycStatus", "modelAsString": false }
+        }
+      }
+    },
+    "FeaturesResponseModel":
+    {
+      "required": ["AffiliateEnabled"],
+      "type": "object",
+      "properties": {
+        "AffiliateEnabled": { "type": "boolean" },
+        "TradingSession": { "$ref": "#/definitions/TradingSessionResponseModel" }
+      }
+    },
+    "TradingSessionResponseModel":
+    {
+      "required": ["Enabled"],
+      "type": "object",
+      "properties": {
+        "Enabled": { "type": "boolean" },
+        "Confirmed": { "type": "boolean" },
+        "Ttl": { "format": "double", "type": "number" }
+      }
+    },
+    "DateOfBirthResponseModel":
+      { "type": "object", "properties": { "DateOfBirth": { "format": "date-time", "type": "string" } } },
+    "LykkeApiErrorResponse":
+      { "type": "object", "properties": { "error": { "type": "string" }, "message": { "type": "string" } } },
+    "DateOfBirthModel":
+    {
+      "required": ["DateOfBirth"],
+      "type": "object",
+      "properties": { "DateOfBirth": { "format": "date-time", "type": "string" } }
+    },
+    "AddressResponseModel": { "type": "object", "properties": { "Address": { "type": "string" } } },
+    "AddressModel": { "required": ["Address"], "type": "object", "properties": { "Address": { "type": "string" } } },
+    "ZipCodeResponseModel": { "type": "object", "properties": { "Zip": { "type": "string" } } },
+    "ZipCodeModel": { "required": ["Zip"], "type": "object", "properties": { "Zip": { "type": "string" } } },
+    "PaymentTransactionResponse":
+    {
+      "required": ["Amount"],
+      "type": "object",
+      "properties": {
+        "Amount": { "format": "double", "type": "number" },
+        "AssetId": { "type": "string" },
+        "WalletId": { "type": "string" },
+        "FirstName": { "type": "string" },
+        "LastName": { "type": "string" },
+        "City": { "type": "string" },
+        "Zip": { "type": "string" },
+        "Address": { "type": "string" },
+        "Country": { "type": "string" },
+        "Email": { "type": "string" },
+        "Phone": { "type": "string" },
+        "DepositOption": { "type": "string" },
+        "OkUrl": { "type": "string" },
+        "FailUrl": { "type": "string" }
+      }
+    },
+    "TransactionInfoResponse":
+    {
+      "required": ["Amount"],
+      "type": "object",
+      "properties": { "AssetId": { "type": "string" }, "Amount": { "format": "double", "type": "number" } }
+    },
+    "BankCardFeeModel":
+    {
+      "required": ["Amount"],
+      "type": "object",
+      "properties": { "Amount": { "format": "double", "type": "number" } }
+    },
+    "PaymentUrlRequestModel":
+    {
+      "required": ["Amount"],
+      "type": "object",
+      "properties": {
+        "Amount": { "format": "double", "description": "Amount in currency defined by CurrencyCode", "type": "number" },
+        "AssetId": { "type": "string" },
+        "WalletId": { "type": "string" },
+        "FirstName": { "type": "string" },
+        "LastName": { "type": "string" },
+        "City": { "type": "string" },
+        "Zip": { "type": "string" },
+        "Address": { "type": "string" },
+        "Country": { "type": "string" },
+        "Email": { "type": "string" },
+        "Phone": { "type": "string" },
+        "OkUrl": { "type": "string" },
+        "FailUrl": { "type": "string" },
+        "CancelUrl": { "type": "string" }
+      }
+    },
+    "PaymentUrlResponseModel":
+    {
+      "type": "object",
+      "properties": {
+        "Url": { "type": "string" },
+        "OkUrl": { "type": "string" },
+        "FailUrl": { "type": "string" },
+        "CancelUrl": { "type": "string" }
+      }
+    },
+    "SwiftDepositEmailModel":
+    {
+      "required": ["Amount"],
+      "type": "object",
+      "properties": { "Amount": { "format": "double", "type": "number" } }
+    },
+    "SwiftRequisitesRespModel":
+    {
+      "type": "object",
+      "properties": {
+        "Bic": { "type": "string" },
+        "AccountNumber": { "type": "string" },
+        "AccountName": { "type": "string" },
+        "PurposeOfPayment": { "type": "string" },
+        "BankAddress": { "type": "string" },
+        "CompanyAddress": { "type": "string" },
+        "CorrespondentAccount": { "type": "string" }
+      }
+    },
+    "CryptoDepositAddressRespModel":
+    {
+      "type": "object",
+      "properties": {
+        "Address": { "type": "string" },
+        "BaseAddress": { "type": "string" },
+        "AddressExtension": { "type": "string" }
+      }
+    },
+    "ClientDialogResponseModel":
+    {
+      "required": ["Type"],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Type": {
+          "enum": ["Info", "Warning", "Question"],
+          "type": "string",
+          "x-ms-enum": { "name": "DialogType", "modelAsString": false }
+        },
+        "ConditionType": {
+          "enum": ["Pretrade", "Predeposit"],
+          "type": "string",
+          "x-ms-enum": { "name": "DialogConditionType", "modelAsString": false }
+        },
+        "Header": { "type": "string" },
+        "Text": { "type": "string" },
+        "Actions": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/DialogActionModel" } }
+      }
+    },
+    "DialogActionModel":
+    {
+      "required": ["Type"],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Type": {
+          "enum": ["Submit", "Checkbox"],
+          "type": "string",
+          "x-ms-enum": { "name": "ActionType", "modelAsString": false }
+        },
+        "Text": { "type": "string" }
+      }
+    },
+    "DataModel": { "type": "object", "properties": { "Data": { "type": "string" } } },
+    "RegenerateKeyRequestModel":
+    {
+      "required": ["Id", "Code"],
+      "type": "object",
+      "properties": { "Id": { "type": "string" }, "Code": { "type": "string" } }
+    },
+    "CreateApiKeyResponse":
+      { "type": "object", "properties": { "ApiKey": { "type": "string" }, "WalletId": { "type": "string" } } },
+    "Google2FaResultModel[CreateApiKeyResponse]":
+    {
+      "required": ["IsCodeValid"],
+      "type": "object",
+      "properties": {
+        "Payload": { "$ref": "#/definitions/CreateApiKeyResponse" },
+        "IsCodeValid": { "type": "boolean" },
+        "Error": { "$ref": "#/definitions/Googl2FaErrorModel" }
+      }
+    },
+    "Googl2FaErrorModel":
+      { "type": "object", "properties": { "Code": { "type": "string" }, "Message": { "type": "string" } } },
+    "RequestClientHistoryCsvRequestModel":
+    {
+      "type": "object",
+      "properties": {
+        "OperationType": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "enum": ["CashIn", "CashOut", "Trade", "OrderEvent"], "type": "string" }
+        },
+        "AssetId": { "type": "string" },
+        "AssetPairId": { "type": "string" }
+      }
+    },
+    "RequestClientHistoryCsvResponseModel": { "type": "object", "properties": { "Id": { "type": "string" } } },
+    "GetClientHistoryCsvResponseModel": { "type": "object", "properties": { "Url": { "type": "string" } } },
+    "ErrorResponse":
+    {
+      "type": "object",
+      "properties": {
+        "ErrorMessage": { "type": "string", "readOnly": true },
+        "ModelErrors": {
+          "type": "object",
+          "additionalProperties": { "uniqueItems": false, "type": "array", "items": { "type": "string" } },
+          "readOnly": true
+        }
+      }
+    },
+    "HistoryResponseModel":
+    {
+      "required": ["DateTime", "Type", "State", "Amount", "FeeSize", "FeeType"],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "DateTime": { "format": "date-time", "type": "string" },
+        "Type":
+        {
+          "enum": ["CashIn", "CashOut", "Trade", "OrderEvent"],
+          "type": "string",
+          "x-ms-enum": { "name": "HistoryType", "modelAsString": false }
+        },
+        "State": {
+          "enum": ["None", "InProgress", "Finished", "Canceled", "Failed"],
+          "type": "string",
+          "x-ms-enum": { "name": "HistoryState", "modelAsString": false }
+        },
+        "Amount": { "format": "double", "type": "number" },
+        "Asset": { "type": "string" },
+        "AssetPair": { "type": "string" },
+        "Price": { "format": "double", "type": "number" },
+        "FeeSize": { "format": "double", "type": "number" },
+        "FeeType": {
+          "enum": ["Unknown", "Absolute", "Relative"],
+          "type": "string",
+          "x-ms-enum": { "name": "FeeType", "modelAsString": false }
+        }
+      }
+    },
+    "TradeResponseModel":
+    {
+      "required": ["Id", "OrderId", "Price", "Direction", "BaseVolume", "QuoteVolume", "Timestamp"],
+      "type": "object",
+      "properties": {
+        "Id": { "format": "uuid", "type": "string" },
+        "OrderId": { "format": "uuid", "type": "string" },
+        "AssetPairId": { "type": "string" },
+        "Price": { "format": "double", "type": "number" },
+        "Direction":
+          { "enum": ["Buy", "Sell"], "type": "string", "x-ms-enum": { "name": "Direction", "modelAsString": false } },
+        "BaseAssetName": { "type": "string" },
+        "BaseVolume": { "format": "double", "type": "number" },
+        "QuoteAssetName": { "type": "string" },
+        "QuoteVolume": { "format": "double", "type": "number" },
+        "Timestamp": { "format": "date-time", "type": "string" }
+      }
+    },
+    "FundsResponseModel":
+    {
+      "required": ["Id", "Volume", "Operation", "Type", "Status", "Timestamp"],
+      "type": "object",
+      "properties": {
+        "Id": { "format": "uuid", "type": "string" },
+        "AssetId": { "type": "string" },
+        "AssetName": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "Operation":
+        {
+          "enum": ["Deposit", "Withdraw"],
+          "type": "string",
+          "x-ms-enum": { "name": "FundsOperation", "modelAsString": false }
+        },
+        "Type": {
+          "enum": ["Undefined", "Card", "Bank", "Blockchain"],
+          "type": "string",
+          "x-ms-enum": { "name": "FundsType", "modelAsString": false }
+        },
+        "Status": {
+          "enum": ["Completed"],
+          "type": "string",
+          "x-ms-enum": { "name": "FundsStatus", "modelAsString": false }
+        },
+        "Timestamp": { "format": "date-time", "type": "string" },
+        "BlockchainHash": { "type": "string" }
+      }
+    },
+    "BlockchainExplorersCollection":
+    {
+      "type": "object",
+      "properties": {
+        "Links": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/BlockchainExplorerLinkResponse" }
+        }
+      }
+    },
+    "BlockchainExplorerLinkResponse":
+      { "type": "object", "properties": { "Url": { "type": "string" }, "Name": { "type": "string" } } },
+    "Index":
+    {
+      "required":
+      [
+        "Value", "Timestamp", "Return24H", "Return5D", "Return30D", "Max24H", "Min24H", "Volatility24H", "Volatility30D"
+      ],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Name": { "type": "string" },
+        "Value": { "format": "double", "type": "number" },
+        "Composition": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/Constituent" } },
+        "Timestamp": { "format": "date-time", "type": "string" },
+        "Return24H": { "format": "double", "type": "number" },
+        "Return5D": { "format": "double", "type": "number" },
+        "Return30D": { "format": "double", "type": "number" },
+        "Max24H": { "format": "double", "type": "number" },
+        "Min24H": { "format": "double", "type": "number" },
+        "Volatility24H": { "format": "double", "type": "number" },
+        "Volatility30D": { "format": "double", "type": "number" }
+      }
+    },
+    "Constituent":
+    {
+      "required": ["Weight", "Price", "MarketCap"],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Weight": { "format": "double", "type": "number" },
+        "Price": { "format": "double", "type": "number" },
+        "MarketCap": { "format": "double", "type": "number" }
+      }
+    },
+    "HistoryElement":
+    {
+      "required": ["Value", "Timestamp"],
+      "type": "object",
+      "properties": { "v": { "format": "double", "type": "number" }, "dt": { "format": "date-time", "type": "string" } }
+    },
+    "AssetPrices":
+    {
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Prices": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/SourcePrice" } }
+      }
+    },
+    "SourcePrice":
+    {
+      "required": ["Price"],
+      "type": "object",
+      "properties": { "Source": { "type": "string" }, "Price": { "format": "double", "type": "number" } }
+    },
+    "IsAliveResponse":
+    {
+      "required": ["IsDebug"],
+      "type": "object",
+      "properties": {
+        "Version": { "type": "string" },
+        "Env": { "type": "string" },
+        "IsDebug": { "type": "boolean" },
+        "IssueIndicators": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/IssueIndicator" }
+        }
+      }
+    },
+    "IssueIndicator":
+      { "type": "object", "properties": { "Type": { "type": "string" }, "Value": { "type": "string" } } },
+    "ConvertionRequest":
+    {
+      "type": "object",
+      "properties": {
+        "BaseAssetId": { "type": "string" },
+        "AssetsFrom": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/AssetWithAmount" } },
+        "OrderAction": { "type": "string" }
+      }
+    },
+    "AssetWithAmount":
+    {
+      "required": ["Amount"],
+      "type": "object",
+      "properties": { "AssetId": { "type": "string" }, "Amount": { "format": "double", "type": "number" } }
+    },
+    "ConvertionResponse":
+    {
+      "type": "object",
+      "properties": {
+        "Converted": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/ConversionResult" } }
+      }
+    },
+    "ConversionResult":
+    {
+      "required": ["Price", "VolumePrice", "Result"],
+      "type": "object",
+      "properties": {
+        "From": { "$ref": "#/definitions/AssetWithAmount" },
+        "To": { "$ref": "#/definitions/AssetWithAmount" },
+        "Price": { "format": "double", "type": "number" },
+        "VolumePrice": { "format": "double", "type": "number" },
+        "Result": {
+          "enum": ["Unknown", "Ok", "InvalidInputParameters", "NoLiquidity"],
+          "type": "string",
+          "x-ms-enum": { "name": "OperationResult", "modelAsString": false }
+        }
+      }
+    },
+    "MarketSlice":
+    {
+      "description":
+        "A model representing the current state of the Spot (only) market in terms of a particular asset pair.",
+      "required": ["Volume24H", "PriceChange24H", "LastPrice", "Bid", "Ask", "High", "Low"],
+      "type": "object",
+      "properties": {
+        "AssetPair": { "description": "Asset pair ID.", "type": "string" },
+        "Volume24H":
+        {
+          "format": "double",
+          "description":
+            "Trading volume for the current day. Is obtained from asset pair's Day Trade candle for today.",
+          "type": "number"
+        },
+        "PriceChange24H":
+        {
+          "format": "double",
+          "description":
+            "Trade price change for the current day. Is calculated by the formula: (Close - Open) / Open, where Open and Close are the corresponding prices for today's Day Trade candle.",
+          "type": "number"
+        },
+        "LastPrice":
+        {
+          "format": "double",
+          "description":
+            "The last trade price. Is obtained from asset pair's Day Trade candle for today and is equal to its Close price.",
+          "type": "number"
+        },
+        "Bid": { "format": "double", "description": "The actual Bid price for the asset pair.", "type": "number" },
+        "Ask": { "format": "double", "description": "The actual Ask price for the asset pair.", "type": "number" },
+        "High": { "format": "double", "type": "number" },
+        "Low": { "format": "double", "type": "number" }
+      }
+    },
+    "PushRegistrationModel":
+    {
+      "required": ["Platform", "PushChannel"],
+      "type": "object",
+      "properties": {
+        "InstallationId": { "type": "string" },
+        "Platform": {
+          "enum": ["Ios", "Android"],
+          "type": "string",
+          "x-ms-enum": { "name": "MobileOs", "modelAsString": false }
+        },
+        "PushChannel": { "type": "string" }
+      }
+    },
+    "InstallationResponse": { "type": "object", "properties": { "InstallationId": { "type": "string" } } },
+    "CreateTransferRequest":
+    {
+      "required": ["Amount", "SourceWalletId", "WalletId"],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Amount": { "format": "double", "type": "number" },
+        "SourceWalletId": { "format": "uuid", "type": "string" },
+        "WalletId": { "format": "uuid", "type": "string" },
+        "Code2Fa": { "type": "string" }
+      }
+    },
+    "Google2FaResultModel[String]":
+    {
+      "required": ["IsCodeValid"],
+      "type": "object",
+      "properties": {
+        "Payload": { "type": "string" },
+        "IsCodeValid": { "type": "boolean" },
+        "Error": { "$ref": "#/definitions/Googl2FaErrorModel" }
+      }
+    },
+    "CreateCashoutRequest":
+    {
+      "required": ["Volume"],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "DestinationAddress": { "type": "string" },
+        "DestinationAddressExtension": { "type": "string" }
+      }
+    },
+    "CreateSwiftCashoutRequest":
+    {
+      "required": ["Volume"],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "Bic": { "type": "string" },
+        "AccNumber": { "type": "string" },
+        "AccName": { "type": "string" },
+        "AccHolderAddress": { "type": "string" },
+        "BankName": { "type": "string" },
+        "AccHolderZipCode": { "type": "string" },
+        "AccHolderCity": { "type": "string" }
+      }
+    },
+    "OrderBookModel":
+    {
+      "required": ["IsBuy", "Timestamp"],
+      "type": "object",
+      "properties": {
+        "AssetPair": { "type": "string" },
+        "IsBuy": { "type": "boolean" },
+        "Timestamp": { "format": "date-time", "type": "string" },
+        "Levels": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/VolumePrice" } }
+      }
+    },
+    "VolumePrice":
+    {
+      "required": ["Volume", "Price"],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "Price": { "format": "double", "type": "number" }
+      }
+    },
+    "LimitOrderResponseModel":
+    {
+      "required": ["Id", "Volume", "Price", "CreateDateTime", "RemainingVolume"],
+      "type": "object",
+      "properties": {
+        "Id": { "format": "uuid", "type": "string" },
+        "AssetPairId": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "Price": { "format": "double", "type": "number" },
+        "LowerLimitPrice": { "format": "double", "type": "number" },
+        "LowerPrice": { "format": "double", "type": "number" },
+        "UpperLimitPrice": { "format": "double", "type": "number" },
+        "UpperPrice": { "format": "double", "type": "number" },
+        "CreateDateTime": { "format": "date-time", "type": "string" },
+        "OrderAction": { "type": "string" },
+        "Status": { "type": "string" },
+        "Type": { "type": "string" },
+        "RemainingVolume": { "format": "double", "type": "number" }
+      }
+    },
+    "MarketOrderRequest":
+    {
+      "required": ["Volume", "OrderAction"],
+      "type": "object",
+      "properties": {
+        "AssetPairId": { "type": "string" },
+        "AssetId": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "OrderAction": {
+          "enum": ["Buy", "Sell"],
+          "type": "string",
+          "x-ms-enum": { "name": "OrderAction", "modelAsString": false }
+        }
+      }
+    },
+    "LimitOrderRequest":
+    {
+      "required": ["Volume", "Price", "OrderAction"],
+      "type": "object",
+      "properties": {
+        "AssetPairId": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "Price": { "format": "double", "type": "number" },
+        "OrderAction": {
+          "enum": ["Buy", "Sell"],
+          "type": "string",
+          "x-ms-enum": { "name": "OrderAction", "modelAsString": false }
+        }
+      }
+    },
+    "LimitOrderCancelMultipleRequest": { "type": "object", "properties": { "AssetPairId": { "type": "string" } } },
+    "StopLimitOrderRequest":
+    {
+      "required": ["Volume", "OrderAction"],
+      "type": "object",
+      "properties": {
+        "AssetPairId": { "type": "string" },
+        "Volume": { "format": "double", "type": "number" },
+        "LowerLimitPrice": { "format": "double", "type": "number" },
+        "LowerPrice": { "format": "double", "type": "number" },
+        "UpperLimitPrice": { "format": "double", "type": "number" },
+        "UpperPrice": { "format": "double", "type": "number" },
+        "OrderAction": {
+          "enum": ["Buy", "Sell"],
+          "type": "string",
+          "x-ms-enum": { "name": "OrderAction", "modelAsString": false }
+        }
+      }
+    },
+    "PaymentMethodsResponse":
+    {
+      "type": "object",
+      "properties": {
+        "PaymentMethods": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/PaymentMethod" } }
+      }
+    },
+    "PaymentMethod":
+    {
+      "required": ["Available"],
+      "type": "object",
+      "properties": {
+        "Name": { "type": "string" },
+        "Assets": { "uniqueItems": false, "type": "array", "items": { "type": "string" } },
+        "Available": { "type": "boolean" }
+      }
+    },
+    "OperationConfirmationModel":
+    {
+      "required": ["Type", "OperationId", "Signature"],
+      "type": "object",
+      "properties": {
+        "Type": { "type": "string" },
+        "OperationId": { "format": "uuid", "type": "string" },
+        "Signature": { "$ref": "#/definitions/OperationConfirmationSignature" }
+      }
+    },
+    "OperationConfirmationSignature": { "type": "object", "properties": { "Code": { "type": "string" } } },
+    "SecondFactorDetailsModel":
+    {
+      "required": ["Type", "Status"],
+      "type": "object",
+      "properties": {
+        "Type": {
+          "enum": ["google"],
+          "type": "string",
+          "x-ms-enum": { "name": "SecondFactorType", "modelAsString": false }
+        },
+        "Status": {
+          "enum": ["active", "forbidden"],
+          "type": "string",
+          "x-ms-enum": { "name": "SecondFactorStatus", "modelAsString": false }
+        }
+      }
+    },
+    "GoogleSetupRequestResponse": { "type": "object", "properties": { "ManualEntryKey": { "type": "string" } } },
+    "GoogleSetupVerifyRequest":
+      { "type": "object", "properties": { "Code": { "type": "string" }, "GaCode": { "type": "string" } } },
+    "GoogleSetupVerifyResponse":
+      { "required": ["IsValid"], "type": "object", "properties": { "IsValid": { "type": "boolean" } } },
+    "SmsConfirmationResponse":
+    {
+      "required": ["Status"],
+      "type": "object",
+      "properties": {
+        "Status": {
+          "enum": ["Allowed", "CallTimeout", "LimitExceed"],
+          "type": "string",
+          "x-ms-enum": { "name": "CallLimitStatus", "modelAsString": false }
+        }
+      }
+    },
+    "TradingSessionConfirmModel": { "type": "object", "properties": { "Confirmation": { "type": "string" } } },
+    "CreateWalletRequest":
+    {
+      "required": ["Type"],
+      "type": "object",
+      "properties": {
+        "Type": {
+          "enum": ["Trusted", "Trading"],
+          "type": "string",
+          "x-ms-enum": { "name": "WalletType", "modelAsString": false }
+        },
+        "Name": { "type": "string" },
+        "Description": { "type": "string" }
+      }
+    },
+    "WalletModel":
+    {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Name": { "type": "string" },
+        "Type": { "type": "string" },
+        "Description": { "type": "string" },
+        "ApiKey": { "type": "string" }
+      }
+    },
+    "CreateApiKeyRequest":
+      { "type": "object", "properties": { "Name": { "type": "string" }, "Description": { "type": "string" } } },
+    "ModifyWalletRequest":
+      { "type": "object", "properties": { "Name": { "type": "string" }, "Description": { "type": "string" } } },
+    "WalletBalancesModel":
+    {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Name": { "type": "string" },
+        "Type": { "type": "string" },
+        "Description": { "type": "string" },
+        "Balances": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/ClientBalanceResponseModel" }
+        },
+        "ApiKey": { "type": "string" }
+      }
+    },
+    "ClientBalanceResponseModel":
+    {
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "Balance": { "format": "double", "type": "number" },
+        "Reserved": { "format": "double", "type": "number" }
+      }
+    },
+    "WalletAssetBalanceModel":
+    {
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Name": { "type": "string" },
+        "Type": { "type": "string" },
+        "Description": { "type": "string" },
+        "Balances": { "$ref": "#/definitions/ClientBalanceResponseModel" },
+        "ApiKey": { "type": "string" }
+      }
+    },
+    "WatchListModel":
+    {
+      "required": ["Order", "ReadOnlyProperty"],
+      "type": "object",
+      "properties": {
+        "Id": { "type": "string" },
+        "Name": { "type": "string" },
+        "AssetPairIds": { "uniqueItems": false, "type": "array", "items": { "type": "string" } },
+        "Order": { "format": "int32", "type": "integer" },
+        "ReadOnlyProperty": { "type": "boolean" }
+      }
+    },
+    "WatchListCreateModel":
+    {
+      "required": ["Order"],
+      "type": "object",
+      "properties": {
+        "Name": { "type": "string" },
+        "Order": { "format": "int32", "type": "integer" },
+        "AssetPairIds": { "uniqueItems": false, "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "WatchListUpdateModel":
+    {
+      "required": ["Order"],
+      "type": "object",
+      "properties": {
+        "Name": { "type": "string" },
+        "Order": { "format": "int32", "type": "integer" },
+        "AssetPairIds": { "uniqueItems": false, "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "WithdrawalCryptoInfoModel":
+    {
+      "required": ["AddressExtensionMandatory"],
+      "type": "object",
+      "properties": {
+        "BaseAddressTitle": { "type": "string" },
+        "AddressExtensionMandatory": { "type": "boolean" },
+        "AddressExtensionTitle": { "type": "string" }
+      }
+    },
+    "WithdrawalCryptoFeeModel":
+    {
+      "required": ["Size", "Type"],
+      "type": "object",
+      "properties": {
+        "Size": { "format": "double", "type": "number" },
+        "Type": {
+          "enum": ["Absolute", "Relative"],
+          "type": "string",
+          "x-ms-enum": { "name": "WithdrawalFeeType", "modelAsString": false }
+        }
+      }
+    },
+    "WithdrawalCashoutFeeModel":
+    {
+      "required": ["FeeType"],
+      "type": "object",
+      "properties": {
+        "AssetId": { "type": "string" },
+        "AssetDisplayId": { "type": "string" },
+        "FeeSize": { "type": "string" },
+        "FeeType": {
+          "enum": ["Unknown", "Absolute", "Relative"],
+          "type": "string",
+          "x-ms-enum": { "name": "FeeType", "modelAsString": false }
+        },
+        "MinCashoutAmount": { "type": "string" }
+      }
+    },
+    "WithdrawalCryptoAddressValidationModel":
+      { "required": ["IsValid"], "type": "object", "properties": { "IsValid": { "type": "boolean" } } },
+    "WithdrawalMethodsResponse":
+    {
+      "type": "object",
+      "properties": {
+        "WithdrawalMethods": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/WithdrawalMethod" }
+        }
+      }
+    },
+    "WithdrawalMethod":
+    {
+      "type": "object",
+      "properties": {
+        "Name": { "type": "string" },
+        "Assets": { "uniqueItems": false, "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "SwiftLastResponse": {
+      "type": "object",
+      "properties": {
+        "Bic": { "type": "string" },
+        "AccNumber": { "type": "string" },
+        "AccName": { "type": "string" },
+        "BankName": { "type": "string" },
+        "AccHolderAddress": { "type": "string" },
+        "AccHolderCity": { "type": "string" },
+        "AccHolderCountry": { "type": "string" },
+        "AccHolderZipCode": { "type": "string" }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": { "flow": "implicit", "authorizationUrl": "http://auth.lykke.com/connect/authorize", "type": "oauth2" }
+  },
+  "security": [{ "oauth2": [] }]
+}

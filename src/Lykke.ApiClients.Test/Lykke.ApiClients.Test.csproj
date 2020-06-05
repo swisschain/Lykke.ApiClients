@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WalletApiV1\Lykke.ApiClients.V1.csproj" />
+    <ProjectReference Include="..\WalletApiV2\Lykke.ApiClients.V2.csproj" />
+  </ItemGroup>
+
+</Project>
