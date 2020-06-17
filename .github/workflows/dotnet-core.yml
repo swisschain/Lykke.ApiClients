@@ -24,7 +24,7 @@ jobs:
     - name: Publish the package to GPR V1
       run: dotnet nuget push src/WalletApiV1/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
     - name: Create the package V2
-      run: dotnet pack --configuration Release /src/WalletApiV2 /p:Version=${GITHUB_REF#refs/tags/}
+      run: dotnet pack --configuration Release src/WalletApiV2 /p:Version=${GITHUB_REF#refs/tags/}
     - name: Publish the package to GPR V2
       run: dotnet nuget push src/WalletApiV2/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
 
