@@ -138,6 +138,191 @@
         }
       }
     },
+    "/api/Antares/email/send": {
+      "post": {
+        "tags": [
+          "Antares"
+        ],
+        "operationId": "SendVerificationEmail",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PostEmailModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResponseModel[RegistrationRequest]"
+            }
+          }
+        }
+      }
+    },
+    "/api/Antares/email/verify": {
+      "post": {
+        "tags": [
+          "Antares"
+        ],
+        "operationId": "VerifyEmail",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VerifyEmailRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResponseModel[EmailVerificationModel]"
+            }
+          }
+        }
+      }
+    },
+    "/api/Antares/phone/send": {
+      "post": {
+        "tags": [
+          "Antares"
+        ],
+        "operationId": "SendVerificationSms",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "phoneModel",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PostPhoneModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResponseModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/Antares/phone/verify": {
+      "post": {
+        "tags": [
+          "Antares"
+        ],
+        "operationId": "VerifyPhone",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VerifyPhoneModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResponseModel[CheckMobilePhoneResultModel]"
+            }
+          }
+        }
+      }
+    },
+    "/api/Antares/register": {
+      "post": {
+        "tags": [
+          "Antares"
+        ],
+        "operationId": "Register",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RegistrationModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResponseModel[AccountsRegistrationResponseModel]"
+            }
+          }
+        }
+      }
+    },
     "/api/ApplicationInfo": {
       "get": {
         "tags": [ "ApplicationInfo" ],
@@ -7663,6 +7848,48 @@
       "properties": {
         "Email": { "type": "string" },
         "PartnerId": { "type": "string" }
+      }
+    },
+    "ResponseModel[RegistrationRequest]": {
+      "type": "object",
+      "properties": {
+        "Result": { "$ref": "#/definitions/RegistrationRequest" },
+        "Error": { "$ref": "#/definitions/ErrorModel" }
+      }
+    },
+    "RegistrationRequest": {
+      "type": "object",
+      "properties": {
+        "Token": { "type": "string" }
+      }
+    },
+    "PostPhoneModel": {
+      "type": "object",
+      "properties": {
+        "PhoneNumber": { "type": "string" },
+        "Token": { "type": "string" }
+      }
+    },
+    "VerifyPhoneModel": {
+      "type": "object",
+      "properties": {
+        "PhoneNumber": { "type": "string" },
+        "Code": { "type": "string" },
+        "Token": { "type": "string" }
+      }
+    },
+    "RegistrationModel": {
+      "type": "object",
+      "properties": {
+        "FullName": { "type": "string" },
+        "Email": { "type": "string" },
+        "Phone": { "type": "string" },
+        "Password": { "type": "string" },
+        "Hint": { "type": "string" },
+        "CountryIso3Poa": { "type": "string" },
+        "AffiliateCode": { "type": "string" },
+        "Pin": { "type": "string" },
+        "Token": { "type": "string" }
       }
     },
     "VerifyEmailRequestModel": {
