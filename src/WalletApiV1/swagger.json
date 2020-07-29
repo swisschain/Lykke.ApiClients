@@ -5990,7 +5990,7 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ResponseModel[TermsOfUseСonsentModel]" }
+            "schema": { "$ref": "#/definitions/ResponseModel[TermsOfUseConsentModel]" }
           }
         }
       },
@@ -6004,7 +6004,7 @@
             "name": "model",
             "in": "body",
             "required": false,
-            "schema": { "$ref": "#/definitions/PutTermsOfUseСonsentModel" }
+            "schema": { "$ref": "#/definitions/PutTermsOfUseConsentModel" }
           },
           {
             "name": "Authorization",
@@ -10329,14 +10329,14 @@
         "CorrespondentAccount": { "type": "string" }
       }
     },
-    "ResponseModel[TermsOfUseСonsentModel]": {
+    "ResponseModel[TermsOfUseConsentModel]": {
       "type": "object",
       "properties": {
-        "Result": { "$ref": "#/definitions/TermsOfUseСonsentModel" },
+        "Result": { "$ref": "#/definitions/TermsOfUseConsentModel" },
         "Error": { "$ref": "#/definitions/ErrorModel" }
       }
     },
-    "TermsOfUseСonsentModel": {
+    "TermsOfUseConsentModel": {
       "type": "object",
       "properties": {
         "NeedAccept": {
@@ -10361,7 +10361,7 @@
         }
       }
     },
-    "PutTermsOfUseСonsentModel": {
+    "PutTermsOfUseConsentModel": {
       "required": [ "DataConsentAccepted", "GeneralTermsOfUseAccepted", "TradingVenuesAccepted" ],
       "type": "object",
       "properties": {
